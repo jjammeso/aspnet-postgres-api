@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using RestApiTemplate.DTOs;
 using RestApiTemplate.Models;
 using RestApiTemplate.Services;
 
@@ -18,9 +19,13 @@ namespace RestApiTemplate.Controllers
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
-        public IEnumerable<WeatherForecast> Get()
+        public IEnumerable<WeatherForecastDTO> Get()
         {
-            return _weatherService.GetWeatherForecasts();
+            IEnumerable<WeatherForecast> weathers = _weatherService.GetWeatherForecasts();
+
+            IEnumerable<WeatherForecastDTO> weatherDtos = from weather in weathers select new WeatherForecastDTO(weather.Date, weather.TemperatureC, weather.Summary);
+
+            return weatherDtos;
         }
     }
 }
