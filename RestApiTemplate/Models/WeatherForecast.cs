@@ -1,4 +1,4 @@
-namespace RestApiTemplate
+namespace RestApiTemplate.Models
 {
     public class WeatherForecast
     {
