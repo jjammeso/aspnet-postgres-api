@@ -1,4 +1,5 @@
-﻿using RestApiTemplate.Models;
+﻿using RestApiTemplate.DTOs;
+using RestApiTemplate.Models;
 
 namespace RestApiTemplate.Services
 {
