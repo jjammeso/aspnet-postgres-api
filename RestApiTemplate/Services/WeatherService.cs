@@ -21,7 +21,6 @@ namespace RestApiTemplate.Services
 
             IEnumerable<WeatherForecastDTO> weatherDtos = from weather in weathers select new WeatherForecastDTO(weather.Date, weather.TemperatureC, weather.Summary);
 
-
             return weatherDtos;
         }
     }
