@@ -21,11 +21,9 @@ namespace RestApiTemplate.Controllers
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecastDTO> Get()
         {
-            IEnumerable<WeatherForecast> weathers = _weatherService.GetWeatherForecasts();
+            IEnumerable<WeatherForecastDTO> weathers = _weatherService.GetWeatherForecasts();
 
-            IEnumerable<WeatherForecastDTO> weatherDtos = from weather in weathers select new WeatherForecastDTO(weather.Date, weather.TemperatureC, weather.Summary);
-
-            return weatherDtos;
+            return weathers;
         }
     }
 }
