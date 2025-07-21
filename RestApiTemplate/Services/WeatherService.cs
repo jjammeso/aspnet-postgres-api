@@ -1,5 +1,6 @@
 ﻿using RestApiTemplate.DTOs;
 using RestApiTemplate.Models;
+using RestApiTemplate.Services.Interfaces;
 
 namespace RestApiTemplate.Services
 {

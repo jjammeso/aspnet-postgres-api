@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using RestApiTemplate.DTOs;
-using RestApiTemplate.Services;
+using RestApiTemplate.Services.Interfaces;
 
 namespace RestApiTemplate.Controllers
 {

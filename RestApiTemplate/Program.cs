@@ -1,5 +1,6 @@
 using RestApiTemplate.Middlewares;
 using RestApiTemplate.Services;
+using RestApiTemplate.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddScoped<IWeatherService, WeatherService>();
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();

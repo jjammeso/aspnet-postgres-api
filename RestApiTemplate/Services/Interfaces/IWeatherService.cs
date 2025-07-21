@@ -1,6 +1,6 @@
 ﻿using RestApiTemplate.DTOs;
 
-namespace RestApiTemplate.Services
+namespace RestApiTemplate.Services.Interfaces
 {
     public interface IWeatherService
     {

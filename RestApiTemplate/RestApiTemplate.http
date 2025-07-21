@@ -4,3 +4,16 @@ GET {{RestApiTemplate_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
+GET {{RestApiTemplate_HostAddress}}/User/
+
+###
+POST {{RestApiTemplate_HostAddress}}/User/
+Content-Type: application/json
+{
+  "id": "1",
+  "name": "John Doe",
+  "passwordHash": "hashed_password_example"
+}
+
+###
+GET {{RestApiTemplate_HostAddress}}/User/2
