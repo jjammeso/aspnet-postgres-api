@@ -1,8 +1,19 @@
+using Microsoft.EntityFrameworkCore;
+using RestApiTemplate.Data.Postgres;
 using RestApiTemplate.Middlewares;
+using RestApiTemplate.Repositories;
+using RestApiTemplate.Repositories.Postgres;
 using RestApiTemplate.Services;
 using RestApiTemplate.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Choose PostgreSQL as the default database
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresConnection")));
+
+// Use PostgreSQL repository
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 // Add services to the container.
 

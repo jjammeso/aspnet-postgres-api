@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RestApiTemplate.DTOs;
-using RestApiTemplate.Models;
 using RestApiTemplate.Services.Interfaces;
 
 namespace RestApiTemplate.Controllers
@@ -36,17 +35,11 @@ namespace RestApiTemplate.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] User user)
+        public async Task<IActionResult> Create([FromBody] CreateUserDTO createUserDTO)
         {
-            await _userService.CreateAsync(user);
+            var created = await _userService.CreateAsync(createUserDTO);
 
-            var dto = new UserDTO
-            {
-                Id = user.Id,
-                Name = user.Name
-            };
-
-            return CreatedAtAction(nameof(GetById), new { id = dto.Id }, dto);
+            return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
         }
     }
 }
