@@ -7,6 +7,6 @@ namespace RestApiTemplate.Services.Interfaces
     {
         Task<List<UserDTO>> GetAllAsync();
         Task<UserDTO?> GetByIdAsync(string id);
-        Task CreateAsync(User user);
+        Task<UserDTO> CreateAsync(CreateUserDTO createUserDTO);
     }
 }

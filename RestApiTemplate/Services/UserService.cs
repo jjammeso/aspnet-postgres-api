@@ -1,48 +1,43 @@
-﻿using RestApiTemplate.DTOs;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using RestApiTemplate.DTOs;
 using RestApiTemplate.Models;
+using RestApiTemplate.Repositories;
 using RestApiTemplate.Services.Interfaces;
 
 namespace RestApiTemplate.Services
 {
     public class UserService : IUserService
     {
-        private static readonly List<User> _users = new()
+        private readonly IUserRepository _userRepository;
+
+        public UserService(IUserRepository userRepository)
         {
-            new User { Id = "1", Name = "alice", PasswordHash = "hashed_pw_1" },
-            new User { Id = "2", Name = "bob", PasswordHash = "hashed_pw_2" },
-            new User { Id = "3", Name = "carol", PasswordHash = "hashed_pw_3" }
-        };
-        public Task CreateAsync(User user)
-        {
-            user.Id = Guid.NewGuid().ToString();
-            _users.Add(user);
-            return Task.CompletedTask;
+            _userRepository = userRepository;
         }
-
-        public Task<List<UserDTO>> GetAllAsync()
+        public async Task<UserDTO> CreateAsync(CreateUserDTO createUserDTO)
         {
-            var userDTOs = _users.Select(u => new UserDTO
+            var user = new User
             {
-                Id = u.Id,
-                Name = u.Name
-            }).ToList();
-
-            return Task.FromResult(userDTOs);
-        }
-
-        public Task<UserDTO?> GetByIdAsync(string id)
-        {
-            var user = _users.FirstOrDefault(u => u.Id == id);
-            if (user == null)
-                return Task.FromResult<UserDTO?>(null);
-
-            var dto = new UserDTO
-            {
-                Id = user.Id,
-                Name = user.Name
+                Name = createUserDTO.Name,
+                Id = Guid.NewGuid().ToString(),
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword(createUserDTO.Password)
             };
+           
+            var returnedUser = await _userRepository.CreateAsync(user);
 
-            return Task.FromResult<UserDTO?>(dto);
+            return new UserDTO(returnedUser);
+        }
+
+        public async Task<List<UserDTO>> GetAllAsync()
+        {
+            var users = await _userRepository.GetAllAsync();
+
+            return [.. users];
+        }
+
+        public async Task<UserDTO?> GetByIdAsync(string id)
+        {
+            return await _userRepository.GetByIdAsync(id);
         }
     }
 }
