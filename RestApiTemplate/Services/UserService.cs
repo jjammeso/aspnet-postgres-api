@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
-using RestApiTemplate.DTOs;
+﻿using RestApiTemplate.DTOs;
 using RestApiTemplate.Models;
 using RestApiTemplate.Repositories;
 using RestApiTemplate.Services.Interfaces;
@@ -31,13 +30,13 @@ namespace RestApiTemplate.Services
         public async Task<List<UserDTO>> GetAllAsync()
         {
             var users = await _userRepository.GetAllAsync();
-
-            return [.. users];
+            return users.Select(u => new UserDTO(u)).ToList();
         }
 
         public async Task<UserDTO?> GetByIdAsync(string id)
         {
-            return await _userRepository.GetByIdAsync(id);
+            var user = await _userRepository.GetByIdAsync(id);
+            return new UserDTO(user);
         }
     }
 }

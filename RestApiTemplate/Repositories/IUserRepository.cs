@@ -1,12 +1,11 @@
-﻿using RestApiTemplate.DTOs;
-using RestApiTemplate.Models;
+﻿using RestApiTemplate.Models;
 
 namespace RestApiTemplate.Repositories
 {
     public interface IUserRepository
     {
-        Task<UserDTO> GetByIdAsync(string id);
-        Task<IEnumerable<UserDTO>> GetAllAsync();
+        Task<User?> GetByIdAsync(string id);
+        Task<IEnumerable<User>> GetAllAsync();
         Task<User> CreateAsync(User user);
     }
 }
