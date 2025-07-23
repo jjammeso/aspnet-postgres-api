@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RestApiTemplate.Data.Postgres;
+using RestApiTemplate.Database.Postgres;
 using RestApiTemplate.DTOs;
 using RestApiTemplate.Models;
 
