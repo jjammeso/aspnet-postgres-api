@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using RestApiTemplate.Data.Postgres;
+using RestApiTemplate.Database.Postgres;
 using RestApiTemplate.Middlewares;
 using RestApiTemplate.Repositories;
 using RestApiTemplate.Repositories.Postgres;
