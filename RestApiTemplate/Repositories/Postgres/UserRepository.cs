@@ -14,17 +14,15 @@ namespace RestApiTemplate.Repositories.Postgres
             _context = context;
         }
 
-        public async Task<UserDTO> GetByIdAsync(string id)
+        public async Task<User?> GetByIdAsync(string id)
         {
-            var user = await _context.Users.FindAsync(id);
+            return await _context.Users.FindAsync(id);
 
-            return new UserDTO(user);
         }
 
-        public async Task<IEnumerable<UserDTO>> GetAllAsync()
+        public async Task<IEnumerable<User>> GetAllAsync()
         {
-            IEnumerable<UserDTO> users = await _context.Users.Select(u => new UserDTO(u)).ToListAsync(); 
-            return users;
+            return await _context.Users.ToListAsync(); 
         }
 
         public async Task<User> CreateAsync(User user)
