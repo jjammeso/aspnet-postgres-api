@@ -1,7 +1,7 @@
 ﻿using RestApiTemplate.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace RestApiTemplate.Data.Postgres
+namespace RestApiTemplate.Database.Postgres
 {
     public class AppDbContext : DbContext
     {
