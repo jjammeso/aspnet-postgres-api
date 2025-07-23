@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using RestApiTemplate.Database;
-using RestApiTemplate.Database.Postgres;
 using RestApiTemplate.Middlewares;
 using RestApiTemplate.Repositories;
 using RestApiTemplate.Services;
@@ -17,7 +16,7 @@ if (dbType == "mongo")
 }
 else if (dbType == "postgres")
 {
-    builder.Services.AddDbContext<AppDbContext>(options =>
+    builder.Services.AddDbContext<PostgresDbContext>(options =>
         options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresConnection")));
     builder.Services.AddScoped<IUserRepository, RestApiTemplate.Repositories.Postgres.UserRepository>();
 }

@@ -3,13 +3,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using RestApiTemplate.Database.Postgres;
+using RestApiTemplate.Database;
+
 
 #nullable disable
 
 namespace RestApiTemplate.Migrations
 {
-    [DbContext(typeof(AppDbContext))]
+    [DbContext(typeof(PostgresDbContext))]
     partial class AppDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
