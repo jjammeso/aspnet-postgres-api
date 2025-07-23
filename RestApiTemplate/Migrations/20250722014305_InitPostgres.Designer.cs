@@ -4,13 +4,14 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using RestApiTemplate.Database.Postgres;
+using RestApiTemplate.Database;
+
 
 #nullable disable
 
 namespace RestApiTemplate.Migrations
 {
-    [DbContext(typeof(AppDbContext))]
+    [DbContext(typeof(PostgresDbContext))]
     [Migration("20250722014305_InitPostgres")]
     partial class InitPostgres
     {

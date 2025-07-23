@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RestApiTemplate.Database.Postgres;
+using RestApiTemplate.Database;
 using RestApiTemplate.DTOs;
 using RestApiTemplate.Models;
 
@@ -7,9 +7,9 @@ namespace RestApiTemplate.Repositories.Postgres
 {
     public class UserRepository:IUserRepository
     {
-        private readonly AppDbContext _context;
+        private readonly PostgresDbContext _context;
 
-        public UserRepository(AppDbContext context)
+        public UserRepository(PostgresDbContext context)
         {
             _context = context;
         }

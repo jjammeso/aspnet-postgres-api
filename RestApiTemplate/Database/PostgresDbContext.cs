@@ -1,11 +1,11 @@
 ﻿using RestApiTemplate.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace RestApiTemplate.Database.Postgres
+namespace RestApiTemplate.Database
 {
-    public class AppDbContext : DbContext
+    public class PostgresDbContext : DbContext
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options)
+        public PostgresDbContext(DbContextOptions<PostgresDbContext> options)
             : base(options) { }
 
         public DbSet<User> Users { get; set; }
