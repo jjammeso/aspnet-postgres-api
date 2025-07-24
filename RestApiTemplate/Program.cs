@@ -41,7 +41,7 @@ builder.Services.AddAuthentication(x =>
 }).AddJwtBearer(y =>
 {
     y.SaveToken = false;
-    y.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+    y.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(
