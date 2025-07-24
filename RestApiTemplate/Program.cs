@@ -1,9 +1,12 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using RestApiTemplate.Database;
 using RestApiTemplate.Middlewares;
 using RestApiTemplate.Repositories;
 using RestApiTemplate.Services;
 using RestApiTemplate.Services.Interfaces;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,6 +33,22 @@ builder.Services.AddScoped<IWeatherService, WeatherService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddAuthentication(x =>
+{
+    x.DefaultAuthenticateScheme =
+    x.DefaultChallengeScheme =
+    x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(y =>
+{
+    y.SaveToken = false;
+    y.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(
+            Encoding.UTF8.GetBytes(builder.Configuration["AppSettings:JWTSecret"]!))
+    };
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -39,9 +58,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors();
+
 app.UseHttpsRedirection();
 
 app.UseMiddleware<RequestLoggingMiddleware>();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
