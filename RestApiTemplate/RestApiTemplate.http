@@ -4,17 +4,17 @@
 POST {{RestApiTemplate_HostAddress}}/auth/register
 Content-Type: application/json
 {
-  "name": "Sonam",
-  "email": "sonam@example.com",
-  "password": "StrongPassword123"
+  "name": "",
+  "email": "@example.com",
+  "password": ""
 }
 
 ### Login to get JWT token
 POST {{RestApiTemplate_HostAddress}}/auth/login
 Content-Type: application/json
 {
-  "email": "sonam@example.com",
-  "password": "StrongPassword123"
+  "email": "@example.com",
+  "password": ""
 }
 
 ### 
@@ -22,10 +22,10 @@ GET {{RestApiTemplate_HostAddress}}/weatherforecast/
 Content-Type: application/json
 
 ###
-GET {{RestApiTemplate_HostAddress}}/User/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySUQiOiIyYzE4ODMzMi1kYWE2LTQ2MjEtODczMi0xMTEwZGVjYTdjNzkiLCJleHAiOjE3NTM0MTQ3MjUsImlzcyI6IlJlc3RBcGlUZW1wbGF0ZSIsImF1ZCI6IkRldmVsb3BlcnMifQ.7DqUArMjCB0xmogw9X79U1flsPeAdOGPUC7ypXD2eYg
+GET {{RestApiTemplate_HostAddress}}/User
+Authorization: Bearer 
 
 
 ###
 GET {{RestApiTemplate_HostAddress}}/User/2
-Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySUQiOiIyYzE4ODMzMi1kYWE2LTQ2MjEtODczMi0xMTEwZGVjYTdjNzkiLCJleHAiOjE3NTM0MTQ3MjUsImlzcyI6IlJlc3RBcGlUZW1wbGF0ZSIsImF1ZCI6IkRldmVsb3BlcnMifQ.7DqUArMjCB0xmogw9X79U1flsPeAdOGPUC7ypXD2eYg
+Authorization: 
