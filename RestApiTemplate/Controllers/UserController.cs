@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using RestApiTemplate.DTOs;
 using RestApiTemplate.Services.Interfaces;
 
@@ -17,6 +18,7 @@ namespace RestApiTemplate.Controllers
             _userService = UserService;
         }
 
+        [Authorize]
         [HttpGet(Name = "User")]
         public async Task<ActionResult<IEnumerable<UserDTO>>> Get()
         {
@@ -24,6 +26,7 @@ namespace RestApiTemplate.Controllers
             return Ok(users);
         }
 
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<UserDTO>> GetById(string id)
         {
@@ -33,13 +36,6 @@ namespace RestApiTemplate.Controllers
 
             return Ok(user);
         }
-
-        [HttpPost]
-        public async Task<IActionResult> Create([FromBody] CreateUserDTO createUserDTO)
-        {
-            var created = await _userService.CreateAsync(createUserDTO);
-
-            return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
-        }
+     
     }
 }

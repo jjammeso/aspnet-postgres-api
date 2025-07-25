@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RestApiTemplate.DTOs;
 using RestApiTemplate.Services.Interfaces;
@@ -17,6 +18,7 @@ namespace RestApiTemplate.Controllers
             _weatherService = weatherService;
         }
 
+        //[Authorize]
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecastDTO> Get()
         {
