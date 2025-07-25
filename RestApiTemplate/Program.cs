@@ -31,6 +31,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddScoped<IWeatherService, WeatherService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddAuthentication(x =>
@@ -43,11 +44,19 @@ builder.Services.AddAuthentication(x =>
     y.SaveToken = false;
     y.TokenValidationParameters = new TokenValidationParameters
     {
+        ValidateIssuer = true,
+        ValidIssuer = builder.Configuration["JwtSettings:Issuer"],
+        ValidateAudience = true,
+        ValidAudience = builder.Configuration["JwtSettings:Audience"],
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(
-            Encoding.UTF8.GetBytes(builder.Configuration["AppSettings:JWTSecret"]!))
+            Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:Secret"]!)),
+        ValidateLifetime = true,
+        ClockSkew = TimeSpan.Zero
     };
 });
+
+builder.Services.AddAuthorization();
 
 var app = builder.Build();
 

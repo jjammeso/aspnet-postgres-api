@@ -13,19 +13,6 @@ namespace RestApiTemplate.Services
         {
             _userRepository = userRepository;
         }
-        public async Task<UserDTO> CreateAsync(CreateUserDTO createUserDTO)
-        {
-            var user = new User
-            {
-                Name = createUserDTO.Name,
-                Id = Guid.NewGuid().ToString(),
-                PasswordHash = BCrypt.Net.BCrypt.HashPassword(createUserDTO.Password)
-            };
-           
-            var returnedUser = await _userRepository.CreateAsync(user);
-
-            return new UserDTO(returnedUser);
-        }
 
         public async Task<List<UserDTO>> GetAllAsync()
         {

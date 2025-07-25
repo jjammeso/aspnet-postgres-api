@@ -31,5 +31,10 @@ namespace RestApiTemplate.Repositories.Postgres
             await _context.SaveChangesAsync();
             return user;
         }
+
+        public async Task<User?> GetByEmailAsync(string email)
+        {
+            return await _context.Users.FindAsync(email);
+        }
     }
 }

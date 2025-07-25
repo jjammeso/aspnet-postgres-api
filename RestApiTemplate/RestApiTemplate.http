@@ -1,19 +1,31 @@
 @RestApiTemplate_HostAddress = http://localhost:5173
 
-GET {{RestApiTemplate_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
-GET {{RestApiTemplate_HostAddress}}/User/
-
-###
-POST {{RestApiTemplate_HostAddress}}/User/
+### Register a new user
+POST {{RestApiTemplate_HostAddress}}/auth/register
 Content-Type: application/json
 {
-  "id": "1",
-  "name": "John Doe",
-  "passwordHash": "hashed_password_example"
+  "name": "",
+  "email": "@example.com",
+  "password": ""
 }
+
+### Login to get JWT token
+POST {{RestApiTemplate_HostAddress}}/auth/login
+Content-Type: application/json
+{
+  "email": "@example.com",
+  "password": ""
+}
+
+### 
+GET {{RestApiTemplate_HostAddress}}/weatherforecast/
+Content-Type: application/json
+
+###
+GET {{RestApiTemplate_HostAddress}}/User
+Authorization: Bearer 
+
 
 ###
 GET {{RestApiTemplate_HostAddress}}/User/2
+Authorization: 

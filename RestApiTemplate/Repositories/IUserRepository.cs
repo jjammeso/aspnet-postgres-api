@@ -7,5 +7,6 @@ namespace RestApiTemplate.Repositories
         Task<User?> GetByIdAsync(string id);
         Task<IEnumerable<User>> GetAllAsync();
         Task<User> CreateAsync(User user);
+        Task<User?> GetByEmailAsync(string user);
     }
 }

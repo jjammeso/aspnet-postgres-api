@@ -28,5 +28,10 @@ namespace RestApiTemplate.Repositories.Mongo
         {
             return await _context.Users.Find(u => u.Id == id).FirstOrDefaultAsync();
         }
+
+        public async Task<User?> GetByEmailAsync(string email)
+        {
+            return await _context.Users.Find(u => u.Email == email).FirstOrDefaultAsync();
+        }
     }
 }
