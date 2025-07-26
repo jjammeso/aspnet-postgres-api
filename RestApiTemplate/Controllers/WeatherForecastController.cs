@@ -19,6 +19,7 @@ namespace RestApiTemplate.Controllers
         }
 
         //[Authorize]
+        [Authorize]
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecastDTO> Get()
         {
