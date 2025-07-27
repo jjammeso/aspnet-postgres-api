@@ -5,27 +5,18 @@ using Microsoft.IdentityModel.Tokens;
 using RestApiTemplate.Database;
 using RestApiTemplate.Middlewares;
 using RestApiTemplate.Repositories;
+using RestApiTemplate.Repositories.Interface;
 using RestApiTemplate.Services;
 using RestApiTemplate.Services.Interfaces;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var dbType = builder.Configuration["DatabaseType"]; // e.g., "postgres" or "mongo"
 
-if (dbType == "mongo")
-{
-    builder.Services.AddSingleton<MongoDbContext>();
-    builder.Services.AddScoped<IUserRepository, RestApiTemplate.Repositories.Mongo.UserRepository>();
-    builder.Services.AddScoped<IRefreshTokenRepository, RestApiTemplate.Repositories.Mongo.RefreshTokenRepository>();
-}
-else if (dbType == "postgres")
-{
-    builder.Services.AddDbContext<PostgresDbContext>(options =>
+builder.Services.AddDbContext<AppDbContext>(options =>
         options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresConnection")));
-    builder.Services.AddScoped<IUserRepository, RestApiTemplate.Repositories.Postgres.UserRepository>();
-    builder.Services.AddScoped<IRefreshTokenRepository, RestApiTemplate.Repositories.Postgres.RefreshTokenRepository>();
-}
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
 
 // Add services to the container.
 

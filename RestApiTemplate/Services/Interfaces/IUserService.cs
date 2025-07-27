@@ -6,6 +6,8 @@ namespace RestApiTemplate.Services.Interfaces
     public interface IUserService
     {
         Task<List<UserDTO>> GetAllAsync();
-        Task<UserDTO?> GetByIdAsync(string id);
+        Task<UserDTO?> GetByIdAsync(Guid id);
+
+        Task<User?> GetByEmailAsync(string email);
     }
 }
