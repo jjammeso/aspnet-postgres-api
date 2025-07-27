@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace RestApiTemplate.Models.Postgres
+namespace RestApiTemplate.Models
 {
-    public class PostgresRefreshToken
+    public class RefreshToken
     {
         [Key]
         public Guid Id { get; set; } = Guid.NewGuid();

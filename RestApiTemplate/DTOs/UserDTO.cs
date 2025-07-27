@@ -9,7 +9,7 @@ namespace RestApiTemplate.DTOs
 
         public UserDTO(User? user)
         {
-            Id = user?.Id;
+            Id = user?.Id.ToString();
             Name = user?.Name;
         }
 

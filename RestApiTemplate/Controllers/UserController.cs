@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using RestApiTemplate.DTOs;
+using RestApiTemplate.Models;
 using RestApiTemplate.Services.Interfaces;
 
 namespace RestApiTemplate.Controllers
@@ -27,8 +29,8 @@ namespace RestApiTemplate.Controllers
         }
 
         [Authorize]
-        [HttpGet("{id}")]
-        public async Task<ActionResult<UserDTO>> GetById(string id)
+        [HttpGet("id/{id:guid}")]
+        public async Task<ActionResult<UserDTO>> GetById(Guid id)
         {
             var user = await _userService.GetByIdAsync(id);
             if (user == null)
@@ -36,6 +38,13 @@ namespace RestApiTemplate.Controllers
 
             return Ok(user);
         }
-     
+
+        [Authorize]
+        [HttpGet("email/{email}")]
+        public async Task<User?> GetByEmail(string email)
+        {
+            return await _userService.GetByEmailAsync(email);
+        }
+
     }
 }

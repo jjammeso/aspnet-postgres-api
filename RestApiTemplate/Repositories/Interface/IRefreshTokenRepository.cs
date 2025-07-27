@@ -1,6 +1,6 @@
 ﻿using RestApiTemplate.Models;
 
-namespace RestApiTemplate.Repositories
+namespace RestApiTemplate.Repositories.Interface
 {
     public interface IRefreshTokenRepository
     {
