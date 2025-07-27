@@ -3,11 +3,13 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.IdentityModel.Tokens;
 using RestApiTemplate.DTOs;
 using RestApiTemplate.Models;
+using RestApiTemplate.Models.Mongo;
 using RestApiTemplate.Repositories;
 using RestApiTemplate.Services.Interfaces;
 using System.IdentityModel.Tokens.Jwt;
 using System.Runtime.InteropServices;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace RestApiTemplate.Services
@@ -16,10 +18,12 @@ namespace RestApiTemplate.Services
     {
         private readonly IConfiguration _configuration;
         private readonly IUserRepository _userRepository;
-        public AuthService(IConfiguration configuration, IUserRepository userRepository)
+        private readonly IRefreshTokenRepository _refreshTokenRepository;
+        public AuthService(IConfiguration configuration, IUserRepository userRepository, IRefreshTokenRepository refreshTokenRepository)
         {
             _configuration = configuration;
             _userRepository = userRepository;
+            _refreshTokenRepository = refreshTokenRepository;
         }
 
         public async Task<UserDTO> RegisterAsync(UserRegisterDTO dto)
@@ -37,17 +41,21 @@ namespace RestApiTemplate.Services
             return new UserDTO(returnedUser);
         }
 
-        public async Task<string> LoginAsync(UserLoginDTO dto)
+        public async Task<(string token, string refreshToken)> LoginAsync(UserLoginDTO dto, string ipAddress)
         {
             var user = await _userRepository.GetByEmailAsync(dto.Email);
             if (user == null || !BCrypt.Net.BCrypt.Verify(dto.Password, user.PasswordHash))
             {
                 throw new UnauthorizedAccessException("Invalid credentials");
             }
+            var token = GenerateToken(user.Id!);
+            var refreshToken = GenerateRefreshToken(user.Id!, ipAddress);
+            await _refreshTokenRepository.AddAsync(refreshToken);
 
-            return GenerateToken(user);
+
+            return (token, refreshToken.Token);
         }
-        public string GenerateToken(User user)
+        public string GenerateToken(String userId)
         {
             var secret = _configuration["JwtSettings:Secret"];
             var issuer = _configuration["JwtSettings:Issuer"];
@@ -56,10 +64,10 @@ namespace RestApiTemplate.Services
 
             var claims = new[]
             {
-                new Claim("UserID", user.Id.ToString()),
+                new Claim("UserID", userId),
             };
 
-            var signInKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret));
+            var signInKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret!));
             var creds = new SigningCredentials(signInKey, SecurityAlgorithms.HmacSha256);
 
             var tokenDescriptor = new JwtSecurityToken
@@ -73,5 +81,38 @@ namespace RestApiTemplate.Services
 
             return new JwtSecurityTokenHandler().WriteToken(tokenDescriptor);
         }
+
+        public MongoRefreshToken GenerateRefreshToken(string userId, string ip)
+        {
+            return new MongoRefreshToken
+            {
+                Token = Convert.ToBase64String(RandomNumberGenerator.GetBytes(64)),
+                UserId = userId,
+                CreatedByIp = ip,
+                CreatedAt = DateTime.UtcNow,
+                ExpiresAt = DateTime.UtcNow.AddDays(7)
+            };
+        }
+
+        public async Task<(string accessToken, string refreshToken)> RefreshTokenAsync(string oldRefreshToken, string requestIp)
+        {
+            var tokenInDb = await _refreshTokenRepository.GetByTokenAsync(oldRefreshToken);
+
+            if (tokenInDb == null || tokenInDb.IsRevoked || tokenInDb.ExpiresAt < DateTime.UtcNow)
+                throw new UnauthorizedAccessException("Invalid refresh token");
+
+            if (tokenInDb.CreatedByIp != requestIp)
+                throw new UnauthorizedAccessException("IP mismatch");
+
+            await _refreshTokenRepository.RevokeAsync(oldRefreshToken);
+
+            var newRefreshToken = GenerateRefreshToken(tokenInDb.UserId, requestIp);
+            await _refreshTokenRepository.AddAsync(newRefreshToken);
+
+            var newAccessToken = GenerateToken(tokenInDb.UserId);
+
+            return (newAccessToken, newRefreshToken.Token);
+        }
+
     }
 }

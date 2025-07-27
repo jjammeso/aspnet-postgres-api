@@ -5,7 +5,7 @@ POST {{RestApiTemplate_HostAddress}}/auth/register
 Content-Type: application/json
 {
   "name": "",
-  "email": "@example.com",
+  "email": "",
   "password": ""
 }
 
@@ -13,7 +13,7 @@ Content-Type: application/json
 POST {{RestApiTemplate_HostAddress}}/auth/login
 Content-Type: application/json
 {
-  "email": "@example.com",
+  "email": "",
   "password": ""
 }
 
@@ -25,7 +25,6 @@ Content-Type: application/json
 GET {{RestApiTemplate_HostAddress}}/User
 Authorization: Bearer 
 
-
 ###
 GET {{RestApiTemplate_HostAddress}}/User/2
-Authorization: 
+Authorization: Bearer
