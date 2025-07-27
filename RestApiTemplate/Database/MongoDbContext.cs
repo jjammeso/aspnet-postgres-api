@@ -14,5 +14,7 @@ namespace RestApiTemplate.Database
         }
 
         public IMongoCollection<User> Users => _database.GetCollection<User>("Users");
+
+        public IMongoCollection<RefreshToken> RefreshTokens => _database.GetCollection<RefreshToken>("RefreshTokens");
     }
 }

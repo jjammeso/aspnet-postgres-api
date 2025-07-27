@@ -1,5 +1,6 @@
 ﻿using RestApiTemplate.Models;
 using Microsoft.EntityFrameworkCore;
+using RestApiTemplate.Models.Postgres;
 
 namespace RestApiTemplate.Database
 {
@@ -10,9 +11,12 @@ namespace RestApiTemplate.Database
 
         public DbSet<User> Users { get; set; }
 
+        public DbSet<PostgresRefreshToken> RefreshTokens { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().HasKey(u => u.Id);
+
         }
     }
 }

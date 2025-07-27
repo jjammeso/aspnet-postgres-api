@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using RestApiTemplate.Database;
@@ -16,12 +17,14 @@ if (dbType == "mongo")
 {
     builder.Services.AddSingleton<MongoDbContext>();
     builder.Services.AddScoped<IUserRepository, RestApiTemplate.Repositories.Mongo.UserRepository>();
+    builder.Services.AddScoped<IRefreshTokenRepository, RestApiTemplate.Repositories.Mongo.RefreshTokenRepository>();
 }
 else if (dbType == "postgres")
 {
     builder.Services.AddDbContext<PostgresDbContext>(options =>
         options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresConnection")));
     builder.Services.AddScoped<IUserRepository, RestApiTemplate.Repositories.Postgres.UserRepository>();
+    builder.Services.AddScoped<IRefreshTokenRepository, RestApiTemplate.Repositories.Postgres.RefreshTokenRepository>();
 }
 
 // Add services to the container.
@@ -72,6 +75,11 @@ app.UseCors();
 app.UseHttpsRedirection();
 
 app.UseMiddleware<RequestLoggingMiddleware>();
+
+app.UseForwardedHeaders(new ForwardedHeadersOptions
+{
+    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+});
 
 app.UseAuthentication();
 
