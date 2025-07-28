@@ -55,7 +55,7 @@ mv appsettings.sample.json appsettings.json
 
 Make sure PostgreSQL is running locally or remotely, then update the PostgresConnection string in the `appsettings.json`. 
 
-```
+```json
 "ConnectionStrings": {
   "PostgresConnection": "Host=localhost;Port=5432;Database=your_db;Username=your_user;Password=your_password",
 }
@@ -64,7 +64,7 @@ Make sure PostgreSQL is running locally or remotely, then update the PostgresCon
 
 Set the following fields in appsettings.json under JwtSettings:
 
-```
+```json
 "JwtSettings": {
   "Issuer": "YourAppName",
   "Audience": "YourAppUser",
