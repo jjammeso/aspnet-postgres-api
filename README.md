@@ -37,8 +37,6 @@ RestApiTemplate/
 └── Program.cs
 ```
 
----
-
 ##⚙️ Getting Started
 
 ### 1. Clone the Repository
@@ -91,7 +89,6 @@ Use it to test endpoints and view request/response models.
 
 I often found myself repeating the same setup for new projects: authentication, architecture, error handling, and more. This template helps spin up a new REST API in minutes with all essentials ready to go.
 
----
 
 🤝 Contribute or Use It
 
