@@ -42,11 +42,18 @@ RestApiTemplate/
 ### 1. Clone the Repository
 ```
 git clone https://github.com/jjammeso/aspnet-postgres-api.git
+cd aspnet-postgres-api/RestApiTemplate
 ```
 
-### 2. Set Up PostgreSQL
+### 2. Rename Configuration File
 
-Make sure PostgreSQL is running locally or remotely. and your credentials are correct in `appsettings.json`.
+Rename **appsettings.sample.json** to **appsettings.json**
+```
+mv appsettings.sample.json appsettings.json
+```
+### 3. Configure PostgreSQL Connection
+
+Make sure PostgreSQL is running locally or remotely, then update the PostgresConnection string in the `appsettings.json`. 
 
 ```
 "ConnectionStrings": {
@@ -54,7 +61,7 @@ Make sure PostgreSQL is running locally or remotely. and your credentials are co
 }
 ```
 
-### 3. Restore Packages & Run
+### 4. Restore Packages & Run the App
 ```bash
 dotnet restore
 dotnet run
