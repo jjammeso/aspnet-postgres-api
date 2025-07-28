@@ -59,13 +59,13 @@ dotnet run
 
 🔐 Authentication Flow
 
-Register → POST /auth/register    //Register a new user
+- Register → POST /auth/register    //Register a new user
 
-Login → POST /auth/login         //Log in and receive access + refresh tokens
+- Login → POST /auth/login         //Log in and receive access + refresh tokens
 
-Use Bearer token in Authorization header      //Use the Bearer token in the Authorization header
+- Use Bearer token in Authorization header      //Use the Bearer token in the Authorization header
 
-Refresh token → POST /auth/refresh          //Refresh the access token using a valid refresh token
+- Refresh token → POST /auth/refresh          //Refresh the access token using a valid refresh token
 
 🧪 API Testing
 
