@@ -6,7 +6,9 @@ Designed to save time by eliminating repetitive setup and allowing you to build 
 > **🚀 Same template with MongoDB as the database is available at:**  
 > 👉 [ASP.NET Core REST API Starter Template (MongoDB)](https://github.com/jjammeso/aspnet-mongo-api)
 
-✨ Features
+---
+
+## ✨ Features
 
     ✅ Clean Architecture (Controllers, Services, Repositories, DTOs)
     🔐 JWT Authentication + Refresh Token Flow
@@ -18,6 +20,8 @@ Designed to save time by eliminating repetitive setup and allowing you to build 
     ⚙️ Dependency Injection for modularity and testability
     🌐 CORS enabled
     🔒 Secure headers + HTTPS enabled
+
+---
 
 📁 Folder Structure
 ```
@@ -36,28 +40,38 @@ RestApiTemplate/
 ├── appsettings.json
 └── Program.cs
 ```
-⚙️ Getting Started
-1. Clone the Repository
+
+---
+
+##⚙️ Getting Started
+
+### 1. Clone the Repository
 ```
 git clone https://github.com/jjammeso/aspnet-postgres-api.git
 ```
-2. Set Up PostgreSQL
+
+### 2. Set Up PostgreSQL
 
 Make sure PostgreSQL is running locally or remotely. and your credentials are correct in `appsettings.json`.
+
 ```
 "ConnectionStrings": {
   "PostgresConnection": "Host=localhost;Port=5432;Database=your_db;Username=your_user;Password=your_password",
 }
 ```
-3. Restore Packages & Run
 
+### 3. Restore Packages & Run
+```bash
 dotnet restore
 dotnet run
+```
 
-    API will run at: http://localhost:5173
-    Swagger UI available at: https://localhost:7095/swagger/index.html
+- API will run at: http://localhost:5173
+- Swagger UI available at: https://localhost:7095/swagger/index.html
 
-🔐 Authentication Flow
+---
+
+## 🔐 Authentication Flow
 
 - Register → POST /auth/register    //Register a new user
 
@@ -71,20 +85,32 @@ dotnet run
 
 Swagger UI is enabled at:
 
-https://localhost:7095/swagger/index.html
+    https://localhost:7095/swagger/index.html
 
 Use it to test endpoints and view request/response models.
-💡 Why I build this template?
+
+---
+
+## 💡 Why I build this template?
 
 I often found myself repeating the same setup for new projects: authentication, architecture, error handling, and more. This template helps spin up a new REST API in minutes with all essentials ready to go.
+
+---
+
 🤝 Contribute or Use It
 
 Feel free to use it in your own projects or contribute to improve it!
 
 Pull requests are welcome. 🌟
-📄 License
+
+---
+
+### 📄 License
 
 MIT License
+
+---
+
 ✍️ Author
 
 Sonam Jamtsho
