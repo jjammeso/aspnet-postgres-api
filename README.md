@@ -60,15 +60,29 @@ Make sure PostgreSQL is running locally or remotely, then update the PostgresCon
   "PostgresConnection": "Host=localhost;Port=5432;Database=your_db;Username=your_user;Password=your_password",
 }
 ```
+### 4. Configure JWT settings
 
-### 4. Restore Packages & Run the App
+Set the following fields in appsettings.json under JwtSettings:
+
+```
+"JwtSettings": {
+  "Issuer": "YourAppName",
+  "Audience": "YourAppUser",
+  "Secret": "CreateASecretKeyWith32characters",
+  "ExpiryMinutes": 60
+}
+```
+
+### 5. Restore Packages & Run the App
 ```bash
 dotnet restore
 dotnet run
 ```
 
-- API will run at: http://localhost:5173
-- Swagger UI available at: https://localhost:7095/swagger/index.html
+### 6. Access the API at links below
+
+- Swagger UI: https://localhost:7095/swagger/index.html
+- API Base URL: http://localhost:5173
 
 ---
 
@@ -78,7 +92,7 @@ dotnet run
 
 - Login → POST /auth/login         //Log in and receive access + refresh tokens
 
-- Use Bearer token in Authorization header      //Use the Bearer token in the Authorization header
+      * Use Bearer token in Authorization header      Add Authorization: Bearer <token> header to protected requests
 
 - Refresh token → POST /auth/refresh          //Refresh the access token using a valid refresh token
 
