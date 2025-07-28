@@ -20,7 +20,7 @@ Designed to save time by eliminating repetitive setup and allowing you to build 
     🔒 Secure headers + HTTPS enabled
 
 📁 Folder Structure
-
+```
 RestApiTemplate/
 ├── Controllers/
 ├── Database/
@@ -35,11 +35,11 @@ RestApiTemplate/
 ├── Validators/
 ├── appsettings.json
 └── Program.cs
-
+```
 ⚙️ Getting Started
 1. Clone the Repository
 
-git clone https://github.com/your-username/restapi-template-mongo.git
+git clone https://github.com/jjammeso/aspnet-postgres-api.git
 
 2. Set Up PostgreSQL
 
