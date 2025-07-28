@@ -4,7 +4,7 @@ A clean, modular, and production-ready REST API starter built on top of **ASP.NE
 Designed to save time by eliminating repetitive setup and allowing you to build new APIs quickly.
 
 > **🚀 Same template with MongoDB as the database is available at:**  
-> 👉 [ASP.NET Core REST API Starter Template (MongoDB)](https://github.com/sonamjamtsho/restapi-template-mongo)
+> 👉 [ASP.NET Core REST API Starter Template (MongoDB)](https://github.com/jjammeso/aspnet-mongo-api)
 
 ✨ Features
 
