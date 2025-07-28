@@ -6,8 +6,6 @@ Designed to save time by eliminating repetitive setup and allowing you to build 
 > **🚀 Same template with MongoDB as the database is available at:**  
 > 👉 [ASP.NET Core REST API Starter Template (MongoDB)](https://github.com/jjammeso/aspnet-mongo-api)
 
----
-
 ## ✨ Features
 
     ✅ Clean Architecture (Controllers, Services, Repositories, DTOs)
@@ -20,8 +18,6 @@ Designed to save time by eliminating repetitive setup and allowing you to build 
     ⚙️ Dependency Injection for modularity and testability
     🌐 CORS enabled
     🔒 Secure headers + HTTPS enabled
-
----
 
 📁 Folder Structure
 ```
