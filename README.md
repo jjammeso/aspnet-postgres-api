@@ -38,17 +38,17 @@ RestApiTemplate/
 ```
 ⚙️ Getting Started
 1. Clone the Repository
-
+```
 git clone https://github.com/jjammeso/aspnet-postgres-api.git
-
+```
 2. Set Up PostgreSQL
 
 Make sure PostgreSQL is running locally or remotely. and your credentials are correct in `appsettings.json`.
-
-"MongoDbSettings": {
+```
+"ConnectionStrings": {
   "PostgresConnection": "Host=localhost;Port=5432;Database=your_db;Username=your_user;Password=your_password",
 }
-
+```
 3. Restore Packages & Run
 
 dotnet restore
