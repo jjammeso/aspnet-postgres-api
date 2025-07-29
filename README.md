@@ -9,15 +9,17 @@ Designed to save time by eliminating repetitive setup and allowing you to build 
 ## ✨ Features
 
     ✅ Clean Architecture (Controllers, Services, Repositories, DTOs)
-    🔐 JWT Authentication + Refresh Token Flow
-    👥 Role-Based Authorization
-    🧾 Request Validation using FluentValidation
-    🧼 Global Error Handling Middleware
+    🔐 JWT Authentication & Authorisation with Refresh Token Flow
     🐘 PostgreSQL Integration via Entity Framework Core
     📖 Swagger UI (OpenAPI) for API testing
     ⚙️ Dependency Injection for modularity and testability
-    🌐 CORS enabled
-    🔒 Secure headers + HTTPS enabled
+    🌐 CORS enabled *(add or customize via Program.cs)*
+    🔒 Secure headers + HTTPS enabled *(basic HTTPS enabled, custom security headers can be extended)*
+
+## 🔧 Possible Additions
+    👥 Role-Based Authorization
+    🧾 Request Validation using FluentValidation
+    🧼 Global Error Handling Middleware
 
 📁 Folder Structure
 ```
