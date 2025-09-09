@@ -87,7 +87,6 @@ namespace RestApiTemplate.Services
                 ExpiresAt = DateTime.UtcNow.AddDays(7)
             };
         }
-
         public async Task<(string accessToken, string refreshToken)> RefreshTokenAsync(string oldRefreshToken, string requestIp)
         {
             var tokenInDb = await _refreshTokenRepository.GetByTokenAsync(oldRefreshToken);
