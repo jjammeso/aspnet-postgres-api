@@ -8,7 +8,9 @@ using RestApiTemplate.Repositories;
 using RestApiTemplate.Repositories.Interface;
 using RestApiTemplate.Services;
 using RestApiTemplate.Services.Interfaces;
+using RestApiTemplate.Validators;
 using System.Text;
+using FluentValidation;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +24,10 @@ builder.Services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+// Register FluentValidation validators here
+builder.Services.AddValidatorsFromAssemblyContaining<UserRegisterDtoValidator>();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddScoped<IWeatherService, WeatherService>();
 builder.Services.AddScoped<IUserService, UserService>();
