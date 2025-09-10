@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Mvc;
 using RestApiTemplate.DTOs;
 using RestApiTemplate.Services.Interfaces;
+using RestApiTemplate.Validators;
 
 namespace RestApiTemplate.Controllers
 {
@@ -9,15 +11,25 @@ namespace RestApiTemplate.Controllers
     public class AuthController:ControllerBase
     {
         private readonly IAuthService _authService;
+        private readonly IValidator<UserRegisterDTO> _validator;
 
-        public AuthController(IAuthService authService)
+        public AuthController(IAuthService authService, IValidator<UserRegisterDTO> validator)
         {
             _authService = authService;
+            _validator = validator;
         }
 
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody]UserRegisterDTO dto)
         {
+            var validationResult = await _validator.ValidateAsync(dto);
+            if (!validationResult.IsValid) {
+                foreach (var error in validationResult.Errors)
+                {
+                    ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+                }
+                return ValidationProblem(ModelState);
+            }
             var userDto = await _authService.RegisterAsync(dto);
 
             return Ok("User registered");
