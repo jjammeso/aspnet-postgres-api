@@ -100,7 +100,8 @@ dotnet run
 
       * Use Bearer token in Authorization header      Add Authorization: Bearer <token> header to protected requests
 
-- Refresh token → POST /auth/refresh          //Refresh the access token using a valid refresh token
+- Refresh the access token using a valid refresh token
+   → POST /auth/refresh      
 
 🧪 API Testing
 
