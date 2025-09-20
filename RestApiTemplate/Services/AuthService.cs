@@ -28,7 +28,8 @@ namespace RestApiTemplate.Services
                 Name = dto.Name,
                 Email = dto.Email,
                 Id = Guid.NewGuid(),
-                PasswordHash = BCrypt.Net.BCrypt.HashPassword(dto.Password)
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword(dto.Password),
+                Role = dto.Role,
             };
 
             var returnedUser = await _userRepository.CreateAsync(user);
@@ -42,14 +43,14 @@ namespace RestApiTemplate.Services
             {
                 throw new UnauthorizedAccessException("Invalid credentials");
             }
-            var token = GenerateToken(user.Id.ToString()!);
+            var token = GenerateToken(user);
             var refreshToken = GenerateRefreshToken(user.Id!, ipAddress);
             await _refreshTokenRepository.AddAsync(refreshToken);
 
 
             return (token, refreshToken.Token);
         }
-        public string GenerateToken(String userId)
+        public string GenerateToken(User user)
         {
             var secret = _configuration["JwtSettings:Secret"];
             var issuer = _configuration["JwtSettings:Issuer"];
@@ -58,7 +59,8 @@ namespace RestApiTemplate.Services
 
             var claims = new[]
             {
-                new Claim("UserID", userId),
+                new Claim("UserName", user.Name!.ToString()),
+                new Claim(ClaimTypes.Role, user.Role),
             };
 
             var signInKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret!));
@@ -99,10 +101,14 @@ namespace RestApiTemplate.Services
 
             await _refreshTokenRepository.RevokeAsync(oldRefreshToken);
 
+            var user = await _userRepository.GetByIdAsync(tokenInDb.UserId);
+            if (user == null)
+                throw new UnauthorizedAccessException("Invalid user");
+
             var newRefreshToken = GenerateRefreshToken(tokenInDb.UserId, requestIp);
             await _refreshTokenRepository.AddAsync(newRefreshToken);
 
-            var newAccessToken = GenerateToken(tokenInDb.UserId.ToString());
+            var newAccessToken = GenerateToken(user);
 
             return (newAccessToken, newRefreshToken.Token);
         }
