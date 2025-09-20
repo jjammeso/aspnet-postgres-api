@@ -16,10 +16,10 @@ Designed to save time by eliminating repetitive setup and allowing you to build 
     🌐 CORS enabled *(add or customize via Program.cs)*
     🔒 Secure headers + HTTPS enabled *(basic HTTPS enabled, custom security headers can be extended)*
     🧾 User credential Validation using FluentValidation
+    👥 Role-Based Authorization
 
 
 ## 🔧 Possible Additions
-    👥 Role-Based Authorization
     🧼 Global Error Handling Middleware
 
 📁 Folder Structure
