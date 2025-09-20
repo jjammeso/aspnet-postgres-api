@@ -91,9 +91,12 @@ dotnet run
 
 ## 🔐 Authentication Flow
 
-- Register → POST /auth/register    //Register a new user
+- Register a new user
+    → POST /auth/register
 
-- Login → POST /auth/login         //Log in and receive access + refresh tokens
+
+- Log in and receive access + refresh tokens
+     → POST /auth/login
 
       * Use Bearer token in Authorization header      Add Authorization: Bearer <token> header to protected requests
 
