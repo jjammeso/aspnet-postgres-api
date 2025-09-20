@@ -20,7 +20,7 @@ namespace RestApiTemplate.Controllers
             _userService = UserService;
         }
 
-        [Authorize]
+        [Authorize(Roles = "Teacher")]
         [HttpGet(Name = "User")]
         public async Task<ActionResult<IEnumerable<UserDTO>>> Get()
         {

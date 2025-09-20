@@ -13,7 +13,7 @@ Content-Type: application/json
 POST {{RestApiTemplate_HostAddress}}/auth/login
 Content-Type: application/json
 {
-  "email": "",
+  "email": "isak@gmail.com",
   "password": ""
 }
 
