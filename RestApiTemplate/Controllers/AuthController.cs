@@ -7,7 +7,7 @@ using RestApiTemplate.Validators;
 namespace RestApiTemplate.Controllers
 {
     [ApiController]
-    [Route("auth")]
+    [Route("[Controller]")]
     public class AuthController:ControllerBase
     {
         private readonly IAuthService _authService;
